@@ -31,6 +31,12 @@ export default function LoginPage() {
 
     })
     router.refresh()
+    setName('')
+    setSurname('')
+    setEmail('')
+    setPhone_number('')
+    setDate_of_birth('')
+    setPassword('')
   }
 
 
