@@ -17,8 +17,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import React, { useState } from "react";
 
 export function ModalButton() {
+  const [parkingSpaces, setParkingSpaces] = useState(5000); // Initialiser le nombre de places de parking à 5000
+
+  const handleValidation = () => {
+    if (parkingSpaces > 0) {
+      setParkingSpaces((prevSpaces) => prevSpaces - 1); // diminuer le nombre de places disponibles de 1
+      console.log(
+        "Demande de place de parking validée. Places restantes :",
+        parkingSpaces - 1
+      );
+    } else {
+      console.log("Plus de places disponibles dans le parking.");
+      // Gérer le cas où il n'y a plus de places disponibles
+    }
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -30,10 +45,10 @@ export function ModalButton() {
           <DialogDescription>Choisir l'état de la demande </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+        <div className="flex gap-4 py-4 w-full">
+          <div className=" items-center gap-4 w-full">
             <Select>
-              <SelectTrigger className="w-[20%]  bg-white  rounded-sm  border-2 border-gray-300">
+              <SelectTrigger className="w-[100%]  bg-white  rounded-sm  border-2 border-gray-300">
                 <SelectValue
                   placeholder="Toutes les catégories"
                   className="text-white w-[50%]"
@@ -51,7 +66,9 @@ export function ModalButton() {
         </div>
 
         <DialogFooter>
-          <Button type="submit">Sauvegarder</Button>
+          <Button onClick={handleValidation} type="submit">
+            Sauvegarder
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
